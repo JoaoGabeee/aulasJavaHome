@@ -14,13 +14,13 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 //classe
-public class Leitor01 {
+public class LeitorBaseCsv {
 
     //metodo de execução
     public static void main(String[] args) {
 
         //objeto para metodo ler
-        new Leitor01().ler();
+        new LeitorBaseCsv().ler();
     }
 
     //metodo private pois tem objeto
