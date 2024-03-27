@@ -36,4 +36,16 @@ public class Funcionario {
     public void setCargoFuncionario(String cargoFuncionario) {
         this.cargoFuncionario = cargoFuncionario;
     }
+
+    public void verificarQuarto(){
+        
+    }
+
+    public void reservarQuarto(){
+
+    }
+    public void inserirOuAlterarDados(){
+
+    }
+    
 }
