@@ -44,6 +44,7 @@ public class Funcionario {
     public void reservarQuarto(){
 
     }
+    
     public void inserirOuAlterarDados(){
 
     }
