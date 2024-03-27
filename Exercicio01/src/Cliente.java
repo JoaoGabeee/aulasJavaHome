@@ -45,4 +45,9 @@ public class Cliente {
     public void setTelefoneCliente(long telefoneCliente) {
         this.telefoneCliente = telefoneCliente;
     }
+
+    public void reservarQuarto(){
+
+    }
+    
 }
