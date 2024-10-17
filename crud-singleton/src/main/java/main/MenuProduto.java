@@ -1,7 +1,7 @@
 package main;
 
 import console.Console;
-import produto.GerenciarProduto;
+import produto.ProdutoDAO;
 import produto.Produto;
 
 import java.math.BigDecimal;
@@ -16,11 +16,11 @@ public class MenuProduto {
     private final static int LISTAR = 3;
     private final static int REMOVER = 4;
     private final static int SAIR = 9;
-    private GerenciarProduto gerenciarProduto;
+    private ProdutoDAO produtoDAO;
 
     public MenuProduto() {
         console = new Console();
-        gerenciarProduto = new GerenciarProduto();
+        produtoDAO = new ProdutoDAO();
     }
 
     public void executar() {
@@ -47,7 +47,7 @@ public class MenuProduto {
 
         } while (opcao != SAIR);
 
-        gerenciarProduto.fecharConexao();
+        produtoDAO.fecharConexao();
     }
 
     private void editar() {
@@ -55,11 +55,11 @@ public class MenuProduto {
 
         int id = console.readInt();
 
-        Produto produto = gerenciarProduto.findById(id);
+        Produto produto = produtoDAO.findById(id);
 
         lerDadosProduto(produto);
 
-        gerenciarProduto.update(produto);
+        produtoDAO.update(produto);
 
         System.out.println("Produto atualizado com sucesso");
     }
@@ -81,7 +81,7 @@ public class MenuProduto {
 
         int idRemover = console.readInt();
 
-        Produto usuario = gerenciarProduto.findById(idRemover);
+        Produto usuario = produtoDAO.findById(idRemover);
         if ( usuario == null ) {
             System.out.println("ID informado não existe");
         }
@@ -94,7 +94,7 @@ public class MenuProduto {
             int opcao = console.readInt();
 
             if ( opcao == 0 ) {
-                gerenciarProduto.remove(idRemover);
+                produtoDAO.remove(idRemover);
                 System.out.println("OK, removido com sucesso");
             }
             else {
@@ -104,7 +104,7 @@ public class MenuProduto {
     }
 
     private void listar() {
-        List<Produto> lista = gerenciarProduto.list();
+        List<Produto> lista = produtoDAO.list();
         for (Produto usuario : lista) {
             System.out.println("\nID: " + usuario.getId());
             System.out.println("Nome: " + usuario.getNome());
@@ -117,7 +117,7 @@ public class MenuProduto {
 
         lerDadosProduto(produto);
 
-        gerenciarProduto.create(produto);
+        produtoDAO.create(produto);
         System.out.println("Usuário cadastro com sucesso");
     }
 
@@ -128,6 +128,10 @@ public class MenuProduto {
         System.out.println("3 - Listar produto");
         System.out.println("4 - Remover produto");
         System.out.println("9 - Sair");
+    }
+
+    public void fecharConexao() {
+        produtoDAO.fecharConexao();
     }
 
 

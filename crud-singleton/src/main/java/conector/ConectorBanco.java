@@ -1,20 +1,23 @@
-package produto;
+package conector;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class Singleton {
+public final class ConectorBanco {
 
     private static EntityManagerFactory entityManagerFactory;
 
-    private Singleton() {}
+    private ConectorBanco() {}
 
-    public static EntityManagerFactory getInstance() {
+    public static synchronized EntityManagerFactory getConnection() {
         if (entityManagerFactory == null) {
             entityManagerFactory = Persistence.createEntityManagerFactory("xuxu");;
         }
         return entityManagerFactory;
+    }
+
+    public static void fecharConexao(){
+        entityManagerFactory.close();
     }
 
 }

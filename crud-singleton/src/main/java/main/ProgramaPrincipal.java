@@ -1,5 +1,6 @@
 package main;
 
+import conector.ConectorBanco;
 import org.apache.log4j.BasicConfigurator;
 
 import console.Console;
@@ -9,6 +10,7 @@ public class ProgramaPrincipal {
 	private Console console;
 	private final static int GERENCIAR_PRODUTO = 0;
 	private final static int GERENCIAR_USUARIO = 1;
+	private final static int SAIR = 2;
 	private MenuProduto menuProduto;
 	private MenuUsuario menuUsuario;
 	
@@ -29,17 +31,24 @@ public class ProgramaPrincipal {
 
 			menuPrincipal();
 			int opcao = console.readInt();
-			if (opcao == GERENCIAR_PRODUTO){
+			if (opcao == GERENCIAR_PRODUTO) {
 				menuProduto.executar();
-			} else if (opcao == GERENCIAR_USUARIO){
+			} else if (opcao == GERENCIAR_USUARIO) {
 				menuUsuario.executar();
+			} else if (opcao == SAIR) {
+				break;
 			}
 
 		}
+
+		ConectorBanco.fecharConexao();
+		menuProduto.fecharConexao();
+		menuUsuario.fecharConexao();
 	}
 
  	private void menuPrincipal() {
 		System.out.printf("[%d]Gerenciar produtos %n", GERENCIAR_PRODUTO);
 		System.out.printf("[%d]Gerenciar usuarios %n", GERENCIAR_USUARIO);
+		System.out.printf("[%d]Sair", SAIR);
 	}
 }

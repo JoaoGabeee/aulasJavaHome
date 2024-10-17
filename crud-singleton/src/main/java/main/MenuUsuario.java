@@ -1,6 +1,6 @@
 package main;
 
-import usuario.GerenciarUsuario;
+import usuario.UsuarioDAO;
 import usuario.Usuario;
 import console.Console;
 import usuario.endereco.Endereco;
@@ -16,11 +16,11 @@ public class MenuUsuario {
     public static final int EXCLUIR_USUARIO = 5;
     public static final int SAIR = 6;
     private final Console console;
-    private GerenciarUsuario gerenciarUsuario;
+    private UsuarioDAO usuarioDAO;
 
     public MenuUsuario() {
         console = new Console();
-        gerenciarUsuario = new GerenciarUsuario();
+        usuarioDAO = new UsuarioDAO();
     }
 
     public void executar() {
@@ -51,7 +51,7 @@ public class MenuUsuario {
     public void adicionarUsuario() {
         Usuario usuario = criarUsuario(new Usuario());
 
-        gerenciarUsuario.create(usuario);
+        usuarioDAO.create(usuario);
         System.out.println("Usuário adicionado com sucesso");
     }
 
@@ -106,13 +106,13 @@ public class MenuUsuario {
     }
 
     public void listarUsuarios() {
-        mostrarInformacoes(gerenciarUsuario.list());
+        mostrarInformacoes(usuarioDAO.list());
     }
 
     public void pesquisarId() {
         long id = console.readLong("Digite o ID a ser pesquisado: ");
 
-        Usuario usuario = gerenciarUsuario.findById(id);
+        Usuario usuario = usuarioDAO.findById(id);
         if (usuario == null) {
             System.out.println("Usuário não encontrado");
             return;
@@ -124,23 +124,23 @@ public class MenuUsuario {
     public void atualizarUsuario() {
         long id = console.readLong("Digite o id do usuário a ser atualizado: ");
 
-        Usuario usuario = criarUsuario(gerenciarUsuario.findById(id));
+        Usuario usuario = criarUsuario(usuarioDAO.findById(id));
 
-        gerenciarUsuario.update(usuario);
+        usuarioDAO.update(usuario);
         System.out.println("Usuário atualizado com sucesso");
     }
 
     public void excluirUsuario() {
         long id = console.readLong("Digite o id do usuário a ser excluído: ");
 
-        Usuario usuario = gerenciarUsuario.findById(id);
+        Usuario usuario = usuarioDAO.findById(id);
 
         if (usuario == null) {
             System.out.println("O usuário solicitado não foi encontrado");
             return;
         }
 
-        gerenciarUsuario.delete(usuario);
+        usuarioDAO.delete(usuario);
         System.out.println("Usuário excluído com sucesso");
     }
 
@@ -153,4 +153,7 @@ public class MenuUsuario {
         System.out.printf("[%d] Sair%n", SAIR);
     }
 
+    public void fecharConexao(){
+        usuarioDAO.fecharConexao();
+    }
 }
