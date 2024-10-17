@@ -36,7 +36,7 @@ public abstract class GenericDAO<T> {
     }
 
     public void delete(int id) {
-        T tipo =findById(id);
+        T tipo = findById(id);
         entityManager.getTransaction().begin();
         entityManager.remove(tipo);
         entityManager.getTransaction().commit();
